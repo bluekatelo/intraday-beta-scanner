@@ -3,25 +3,27 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import numpy as np
 
-#todo - replace with accepting input for comparison stocks, also currently unusued
+#TODO - replace list of comparisonStocks with user input/choice
 comparisonStocks = ['MSFT', 'NVDA', 'AAPL', 'NFLX', 'TSLA']
 baseStock = 'SPY'
 
+#currently unused
 class backtesting:
     def __init__(self) -> None:
-        pass
-
-    def backtest(self, df, buy_condition, sell_condition):
         self.shmoney = 1000000
         self.portfolio = {}
         self.default_qty = 0
-
+        pass
+    
     #accept stock dataframe and buy condition, return win rate, p/l, sharpe etc
+    #def backtest(self, df, buy_condition, sell_condition):
 
+#currently unused
 class paperTrading:
     def __init__(self) -> None:
         pass
 
+    #functions for live trading with fake money
     #def buy(ticker, quantity):
     #def sell(ticker, quantity):
 
@@ -38,11 +40,11 @@ class dfFuncs:
     def pct_move_from_open(df):
         df['pctMove'] = ((df['Close'] - df.iloc[0, 0]) / df.iloc[0, 0]) * 100
 
-
+    # add column relStr vs SPY
     def relativeStrength(df):
         df['relStr'] = SPY['pctMove'].sub(df['pctMove'])
 
-    #add moving average column to dataframe
+    #add moving average of selected column (dataColumn) to dataframe in new column (columnName)
     def ma(df, columnName, dataColumn, span):
         df[columnName] = df[dataColumn].rolling(span).mean()
 
@@ -59,15 +61,3 @@ for i in comparisonStocks:
     df.to_excel(path, index = False, header=True)
 
 #MSFT = pd.read_excel("C:\\Python\\simple_relativeStrength\\dataframes\\MSFT.xlsx")
-
-
-#old pct_move function
-
-"""
-def pct_move_from_open(df):
-    lst = list(df['Close'])
-    pctMoves = []
-    for i in lst:
-        pctMoves.append(round(((i - lst[0]) / lst[0])*100, 3))
-    df['pctMove'] = pctMoves
-"""
